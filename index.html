@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Arduino</title>
+</head>
+<!-- Created by Kendall O'Brien 12/8/2021 -->
+<body>
+    <nav id="navbar">
+        <ul>
+            <header>Arduino Docs</header>
+            <li><a class="nav-link" href="#History">History</a></li>
+            <li><a class="nav-link" href="#Hardware">Hardware</a></li>
+            <li><a class="nav-link" href="#IDE">IDE</a></li>
+            <li><a class="nav-link" href="#Code_Examples">Code Examples</a></li>
+            <li><a class="nav-link" href="#Example_Projects">Example Projects</a></li>
+            <li><a class="nav-link" href="#Community">Community</a></li>
+        </ul>
+    </nav>
+    <main id="main-doc">
+        <section class="main-section" id="History">
+            <header class="section-header">History</header>
+            <h3>Where does the name Arduino come from?</h3>
+            <p>Contrary to popular naming conventions, the name of the Arduino doesn't come from the name of its
+                creator. It in fact comes from a small bar in Ivrea, Italy where the creators would gather to share
+                ideas for creating the Arduino microcontroller. The name of the bar? You guessed it, Arduino.</p>
+            <h3>What is the mission of the creators of Arduino?</h3>
+            <p>The Arduino project began in 2005 as a tool for students at the Interaction Design Institute Ivrea,
+                Italy, aiming to provide a low-cost and easy way for novices and professionals to create devices that
+                interact with their environment using sensors and actuators. Common examples of such devices intended
+                for beginner hobbyists include simple robots, thermostats and motion detectors. Source, Wikipedia.</p>
+        </section>
+
+        <section class="main-section" id="Hardware">
+            <header class="section-header">Hardware</header>
+            <h3>The Board (UNO R3)</h3>
+            <p>
+                The board itself has a footprint similar to that of a deck of cards and only weighs 25g. It is based on
+                the ATMega328P, a reliable microcontroller chip which is used to control the input and output pins on the board.</p>
+            <h3>I/O</h3>
+            <p>
+                14 digital input/output pins (of which 6 can be used as PWM outputs), 6 analog inputs, a 16 MHz ceramic
+                resonator, a USB connection, a power jack, an ICSP header and a reset button</p>
+        </section>
+
+        <section class="main-section" id="IDE">
+            <header class="section-header">IDE</header>
+            <h3>Arduino Software</h3>
+            <p>
+                The board is programmed using either its own lightweight IDE or  a tool from the command line. The Arduino
+                language is based on C and C++ and utilizes a lot of the keywords from these languages. Upon opening a
+                new "sketch" in the IDE the user is welcomed by a couple of methods</p>
+            <code>void setup();</code>
+            <p>and</p>
+            <code>void loop();</code>
+        </section>
+
+        <section class="main-section" id="Code_Examples">
+            <header class="section-header">Code Examples</header>
+            <ul>
+                <li>
+                    <p>Examples of printing a string:</p>
+                    <code>Serial.print("Hello World")</code>
+                    <p>Output: </p>
+                    <code>"Hello World"</code>
+                </li>
+                <hr>
+                <li>
+                    <code>Serial.print("2 + 2")</code>
+                    <p>Output: </p>
+                    <code>"2 + 2"</code>
+                </li>
+            </ul>
+        </section>
+
+        <section class="main-section" id="Example_Projects">
+            <header class="section-header">Example Projects</header>
+            <p>Here are a few projects created with the Arduino microcontroller. Note that these are not complete code
+                files, they are merely representations. Credits to the original authors are next to the project names
+                links to the original projects can be found just below the project name.</p>
+            <ul>
+                <li>
+                    <h4>A program to monitor soil moisture - Fouad_Roboticist</h4>
+                    <a href="https://create.arduino.cc/projecthub/Fouad_Roboticist/soil-moisture-monitoring-769740">Click
+                        here for the original project</a>
+                    <pre><code>
+                        #define SensorPin A0 
+                        int sensorValue = 0; 
+                        void setup() { 
+                         Serial.begin(115200); 
+                        } 
+                        void loop() { 
+                         for (int i = 0; i <= 100; i++) 
+                         { 
+                           sensorValue = sensorValue + analogRead(SensorPin); 
+                           delay(1); 
+                         } 
+                         sensorValue = sensorValue/100.0; 
+                         Serial.println(sensorValue); 
+                         Serial.print("%");
+                         delay(1000); 
+                        }
+                    </code></pre>
+                </li>
+                <li>
+                    <h4>Simulated Candle Effect - maxim2511</h4>
+                    <a href="https://create.arduino.cc/projecthub/maxim2511/candle-led-light-0166f8">Click here for the
+                        original project</a>
+                    <pre><code>
+                        const int pin = 10; // PWM pin. For other arduino use diferent pin
+                        long random_led;
+                        long random_time;
+                        int difer_time();
+                        
+                        void setup() {
+                          pinMode(pin, OUTPUT);
+                          randomSeed(analogRead(A3));
+                          Serial.begin(9600);
+                        }
+                        
+                        int min_led = 200;
+                        int max_led = 1024;
+                        
+                        void loop() {
+                          random_led = random(min_led, max_led); // random number to shine led
+                          random_time = difer_time(random_led); // convert stranght to time
+                          analogWrite(pin, random_led); // set pin to value PWM
+                          delay(random_time); // set delay depending of the stranght
+                        }
+                        }</code></pre>
+                </li>
+                <li>
+                    <h4>Thermometer - microst</h4>
+                    <a
+                        href="https://create.arduino.cc/projecthub/microst/thermometer-diode-based-524613?ref=search&ref_id=thermometer&offset=0">Click
+                        here for the original project.</a>
+                    <pre><code>/*
+                        Thermometer based on 1n4148 silicon diode used as temperature sensor.The thermometer is based on the diode characteristic that the increase of the temperature its forward voltage (VF) is lowered by 2,2mV / ° C.
+                      Fixing the value of Vf = VF0 at ambient temperature t0, the temperature value
+                      t is calculated with the following formula:
+                      
+                      t= t0 - [vf(t)- vf0]* K
+                      
+                      with K = 1 / 2,2mV
+                      
+                      The value of Vf (t) = dtemp -vf0 is obtained by averaging values of 1024 by acquiring as many vf values
+                      
+                      The result of t is shown on the serial monitor
+                      */
+                      // set pin numbers:
+                      
+                      const int in = A0;          // used to bias the diode  anode
+                      const int t0 = 20.3;
+                      const float vf0 = 573.44;
+                      // variables will change:
+                      
+                      int i;
+                      float dtemp, dtemp_avg, t;
+                      
+                      void setup() {
+                        Serial.begin(9600);
+                        pinMode(in, INPUT_PULLUP);            // set the  pin IN with npull up to bias the diode
+                      }
+                      
+                      void loop() {
+                        dtemp_avg = 0;
+                        for (i = 0; i < 1024; i++) {
+                          float vf = analogRead(A0) * (4976.30 / 1023.000);
+                          //Serial.println(vf);
+                          dtemp = (vf - vf0) * 0.4545454;
+                          dtemp_avg = dtemp_avg + dtemp;
+                        }
+                        t = t0 - dtemp_avg / 1024;
+                        Serial.print("temperature in Celcius degree)   = " );
+                        Serial.println(t);
+                        
+                        delay (1000);
+                      }
+                    </code></pre>
+                </li>
+            </ul>
+        </section>
+
+        <section class="main-section" id="Community">
+            <header class="section-header">Community</header>
+            <p>Since its inception, the Arduino has grown a very large fan base. It's being used around the world to
+                solve real world problems. There is a tremendous amount of support for these microcontrollers online and
+                a great place to start is the <a href="arduino.cc">Arduino Project Hub</a> where people share their
+                ideas and projects.</p>
+        </section>
+
+    </main>
+</body>
+
+</html>
